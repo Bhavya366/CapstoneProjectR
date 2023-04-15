@@ -1,38 +1,127 @@
-.App {
-  text-align: center;
+*{
+  margin:0;
+  font-family: sans-serif;
+  color:white;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.page{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  background-color: black;
+  height:100vh;
 }
 
-.App-link {
-  color: #61dafb;
+/* page1 */ 
+.inner-component1{
+  background-image: url('./images/homepage.jpg');
+  background-size: cover;
+  width:50%;
+}
+.inner-component1 .inner-comp-div{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  margin:10%
+}
+.lower-text{
+  font-size: 38px;
+  margin-top: 370px;
+}
+button{
+  border-radius: 50px;
+  padding:10px 50px;
+  background-color: #72DB73;
+  border: none;
+}
+.inner-component2{
+  background-color: black;
+  height:100%;
+  width:50%
+}
+.inner-component2 .form{
+  margin:2% 20%;
+}
+.inner-component2 .input{
+  background-color: #292929;
+  height:40px;
+  width:100%;
+  border:none;
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+#p-tag{
+  color:#7C7C7C;
+  font-size: 14px;
+  line-height: 1.5;
+}
+span{
+  color:red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* page2 */
+.first-part{
+  width:23vw;
+  margin-left:10%;
+}
+#page2{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items:center;
+  height:70vh;
+  width:43vw;
+  margin-right: 10%;
+}
+.card{
+  padding:10px;
+  border-radius: 8px;
+}
+.feature{
+  color:white;
+  padding:10px;
+  line-height: 3;
+  border-radius: 50px;
+  background-color: #148A08;
+}
+.img{
+  width:11vw;
+  height:11vh;
+}
+
+@media screen and (max-width: 500px) {
+  .inner-component1 .inner-comp-div{
+    margin:0;
+    padding:20px;
   }
-  to {
-    transform: rotate(360deg);
+  .inner-component2 .form{
+    padding:30px;
+    margin:0% 10%;
+  }
+  .lower-text{
+    margin-top: 200px;
+  }
+  .inner-component1,.inner-component2{
+    width:100%;
+  }
+  .page{
+    display: contents;
+  }
+  #page2{
+    width:100vw;
+    margin:0;
+    height:100%
+  }
+  .card{
+    margin-top:30px;
+  }
+  .first-part{
+    margin:0;
+    width:100vw;
+    background-color: black;
+  }
+  .img{
+    width:40vw;
+  }
+  .inner-component2{
+    display: block;
   }
 }
