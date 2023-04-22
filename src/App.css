@@ -200,7 +200,6 @@ span{
   background-color: #1E2343;
   display: flex;
   justify-content: space-around;
-  height:20vh;
   border-radius: 10px;
 }
 .timer-set{
@@ -209,9 +208,8 @@ span{
   display: flex;
   justify-content: space-between;
 }
-.timer-set form input{
+.timer form input{
   width:50px;
-  color: red;
   height:50px;
 }
 @media screen and (max-width: 500px) {
