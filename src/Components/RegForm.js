@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 const Form = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const [data,setData] = useState({});
+    const [data,setData] = useState([]);
     const [checkbox,setCheckbox] = useState("");
 
     const onsubmit = (formdata) => {
@@ -16,12 +16,16 @@ const Form = () => {
             setCheckbox("*select privacy and policy")
         else
             setCheckbox("")
-        if(formdata.name!=='' && formdata.username!=='' && formdata.email!=='' && formdata.mobilenumber!=='' && formdata.chooseCb===true)
+        if(formdata.name!=='' && formdata.username!=='' && formdata.email!=='' && formdata.mobilenumber!=='' && formdata.chooseCb===true){
+            localStorage.setItem("details",JSON.stringify([
+                formdata.name,
+                formdata.username,
+                formdata.email,
+                formdata.mobilenumber,
+            ]))
             navigate('/entertainment');
+        }   
     }
-    console.log(data)
-    localStorage.setItem("userdetails",JSON.stringify(data))
-
     return (
         <div className='page'>
             <div className='inner-component1'>
@@ -34,7 +38,7 @@ const Form = () => {
             </div>
             <div className="inner-component2">
                 <div className='form'>
-                    <div style={{ textAlign: "center", }}><img src={title} alt="alternate" style={{ width: "180px", height: "60px" }} />
+                    <div style={{ textAlign: "center", }}><img src={title} alt="alternate" style={{ width: "160px", height: "50px" }} />
                         <p>Create your account</p><br></br>
                         <p>Email  |  Google</p><br></br>
                     </div>
@@ -61,7 +65,7 @@ const Form = () => {
                             },
                             pattern: {
                                 value: /^(?!\s*$)[-a-zA-Z ]*$/,
-                                message: "*enter valid name",
+                                message: "*enter valid username",
                             },
                         })} />
                         <span>{errors.username?.message}</span>
@@ -69,10 +73,6 @@ const Form = () => {
 
                         <input type="email" placeholder='Email' className='input' {...register("email", {
                             required: true,
-                            min: {
-                                value: 5,
-                                message: "enter valid email"
-                            },
                             pattern: {
                                 value: /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/,
                                 message: "*enter valid email"
@@ -89,11 +89,11 @@ const Form = () => {
                             },
                         })} />
                         <span>{errors.mobilenumber?.message}</span>
-                        {errors.mobilenumber?.message === '' ? <span>*enter mobile number</span> : <span></span>}
+                        {errors.mobilenumber?.message === '' ? <span>*enter mobile number</span> : <span></span>}<br></br>
 
                         <input type="checkbox" name="selectCheckbox" id="selectCheckbox" {...register('chooseCb')} />&nbsp;
-                        <label htmlFor="chooseCb" style={{color:"#7C7C7C"}} id='p-tag'>Share my registration data with Superapp</label>
-                        <span>{checkbox}</span><br></br><br></br>
+                        <label htmlFor="chooseCb" style={{color:"#7C7C7C"}} id='p-tag'>Share my registration data with Superapp</label><br></br>
+                        <span>{checkbox}</span><br></br>
 
                         <button type="submit" style={{ width: "105%" }}>SIGN UP</button><br></br><br></br>
                         <p id='p-tag'>By clicking on Sign up. you agree to Superapp <span style={{ color: "#72DB73" }}>Terms and Conditions of Use</span></p><br></br>

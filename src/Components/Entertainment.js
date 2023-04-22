@@ -12,8 +12,10 @@ import Romance from '../images/Romance.png'
 import Thriller from '../images/Thriller.png'
 import Western from '../images/Western.png'
 
+
 const Entertainment = () => {
     const [category, setCategory] = useState([]);
+    const [error,setError] = useState("");
     const navigate = useNavigate();
     const cards = [{
         bgcolor: "#FF5209", text: "Action", image: Action, bordercolor: "#11B800",
@@ -38,53 +40,54 @@ const Entertainment = () => {
     const add = (filteredCategory) => {
         if (!category.includes(filteredCategory))
             setCategory([...category, filteredCategory])
+        if(category.length>=0)
+        setError("")
     }
     const handleRemoveCategory = (CategorytoRemove) => {
         setCategory((prevCategory) =>
             prevCategory.filter((category) => category !== CategorytoRemove)
         );
     };
-    localStorage.setItem("categories",JSON.stringify(category))
-    const  validCategory=()=>{
-        if(category.length>=3)
+    localStorage.setItem("categories", JSON.stringify(category))
+    const validCategory = () => {
+        if (category.length >= 3)
             navigate('/homepage')
         else
-            alert("Please select atleast three categories...")
+            setError('*Please select atleast 3 categories');
     }
     console.log(category)
     return (
-        <div style={{backgroundColor:"black",}}>
-        <div className='page' style={{alignItems: "center" }}>
-            <div className='first-part'>
-                <img src={title} alt="" style={{marginBottom: "20%" }} className='img' />
-                <h1 style={{lineHeight: "1.5" }}>Choose your entertainment category</h1><br></br>
-                <div>
-                    {category.map((category, index) => {
-                        return (
-                            
+            <div className='page' style={{ alignItems: "center" }}>
+                <div className='first-part'>
+                    <img src={title} alt="" style={{ marginBottom: "20%" }} className='img' />
+                    <h1 style={{ lineHeight: "1.5" }}>Choose your entertainment category</h1><br></br>
+                    <div>
+                        {category.map((category, index) => {
+                            return (
+
                                 <span key={index} className='feature'>
                                     {category} &nbsp;
-                                    <button onClick={() => handleRemoveCategory(category)} style={{backgroundColor:"#148A08",padding:"0px"}}>x</button>
+                                    <button onClick={() => handleRemoveCategory(category)} style={{ backgroundColor: "#148A08", padding: "0px" }}>x</button>
                                 </span>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
+                    <span>{error}</span>
                 </div>
-
+                <div className='inner-component2' id="page2">
+                    {cards.map((item, index) => {
+                        return (
+                            <div key={index} style={{ backgroundColor: item.bgcolor, border: `3px solid ${item.bordercolor}`, }}
+                                className='cards' onClick={() => { add(item.text) }} >
+                                <h3>{item.text}</h3><br></br>
+                                <img src={item.image} alt="alternate" className='img' />
+                            </div>
+                        )
+                    })}
+                    <button onClick={() => { validCategory() }} style={{ margin:"5% 0% 0% 50%",backgroundColor:"#148A08" }}>Next Page</button> 
+                </div>
+                
             </div>
-            <div className='inner-component2' id="page2">
-                {cards.map((item, index) => {
-                    return (
-                        <div key={index} style={{ backgroundColor: item.bgcolor, border: `3px solid ${item.bordercolor}`, }}
-                            className='card' onClick={() => { add(item.text) }} >
-                            <h3>{item.text}</h3><br></br>
-                            <img src={item.image} alt="alternate" className='img' />
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
-          <p style={{textAlign:"right"}}>  <button onClick={()=>{validCategory()}} style={{textAlign:"end"}}>Next</button> </p>
-        </div>
     );
 };
 
